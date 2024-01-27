@@ -1,3 +1,4 @@
+import { FastifyInstance } from "fastify";
 import { LoginUserController } from "../controllers/loginUserController/loginUserController";
 import { LoginUserParams } from "../controllers/loginUserController/protocols";
 import { RegisterUserParams } from "../controllers/registerUserController/protocols";
@@ -6,7 +7,7 @@ import { LoginUserRepository } from "../respositories/loginUser/loginUserReposit
 import { RegisterUserRepository } from "../respositories/registerUser/registerUserRepository";
 import prisma from "../services/prisma";
 
-export default async function (app, options) {
+export default async function (app: FastifyInstance) {
   app.get("/", async (request, reply) => {
     reply.send(prisma.user.findMany());
   });

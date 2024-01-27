@@ -1,8 +1,8 @@
-import fastify from 'fastify';
+import { FastifyInstance } from "fastify";
 import { Server as SocketIOServer } from 'socket.io';
 import { AddressInfo } from 'net';
 
-export default async function startServer(app: any) {
+export default async function startServer(app: FastifyInstance) {
     try {
   
       await app.listen({port: parseInt(process.env.PORT) || 3001});

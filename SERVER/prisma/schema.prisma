@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,4 +11,18 @@ model User {
   email    String @id @map("_id")
   name     String
   password String
+}
+
+model Chat {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  user  String
+  user_ String
+}
+
+model Message {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  user    String
+  chat    String
+  date    DateTime @default(now())
+  content String
 }

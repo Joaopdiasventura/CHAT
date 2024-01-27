@@ -19,5 +19,4 @@ export class LoginUserRepository implements ILoginUserRepository{
             throw new Error(error);
         }
     }
-    
 }

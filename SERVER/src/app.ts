@@ -3,9 +3,11 @@ import { config } from 'dotenv';
 config();
 
 import fastify from 'fastify';
-import user from './routes/user';
-import startServer from './server';
 import cors from "@fastify/cors";
+import startServer from './server';
+import user from "./routes/user";
+import chat from "./routes/chat";
+import message from './routes/message';
 
 const app = fastify();
 
@@ -18,5 +20,7 @@ const corsOptions = {
 app.register(cors, corsOptions);
 
 app.register(user);
+app.register(chat);
+app.register(message);
 
 startServer(app);
