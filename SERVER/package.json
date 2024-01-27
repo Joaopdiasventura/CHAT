@@ -13,6 +13,7 @@
     "@fastify/cors": "^8.5.0",
     "@prisma/client": "^5.8.1",
     "@types/bcrypt": "^5.0.2",
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.1",
     "fastify": "^4.25.2",

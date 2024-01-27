@@ -34,7 +34,7 @@ export class SendMessageRepository implements ISendMessagerepository{
 
             const {name} = await prisma.user.findFirst({where: {email: params.user}});
 
-            await prisma.message.create({
+            const msg = await prisma.message.create({
                 data:{...params}
             });
 
@@ -53,14 +53,12 @@ export class SendMessageRepository implements ISendMessagerepository{
             }
 
     
-            updatedMessages.forEach(msg => {
     
                 const socketId = this.userEmailToSocketId.get(recipientEmail);
                 if (socketId) {
                     const content = msg.content;
                     this.io.to(socketId).emit('newMessage', {name, content});
                 }
-            });
     
             return updatedMessages;
             
