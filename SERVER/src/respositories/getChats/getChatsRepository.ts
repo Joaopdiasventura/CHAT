@@ -24,9 +24,8 @@ export class GetChatsRepository implements IGetChatsRepository{
         });
 
         for(const chat of chats){
-            console.log(chat);
             
-            if (chat.user = params.user) {
+            if (chat.user == params.user) {
                 const user = await prisma.user.findUnique({where:{email: chat.user_}})
                 chat.user_ = user.name;
             }

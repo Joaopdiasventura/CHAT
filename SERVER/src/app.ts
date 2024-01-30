@@ -8,6 +8,7 @@ import startServer from './server';
 import user from "./routes/user";
 import chat from "./routes/chat";
 import message from './routes/message';
+import token from './routes/token';
 
 const app = fastify();
 
@@ -22,5 +23,6 @@ app.register(cors, corsOptions);
 app.register(user);
 app.register(chat);
 app.register(message);
+app.register(token);
 
 startServer(app);
