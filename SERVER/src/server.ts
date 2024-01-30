@@ -5,7 +5,7 @@ import { AddressInfo } from 'net';
 
 export default async function startServer(app: FastifyInstance) {
   try {
-    const port = parseInt(process.env.PORT) || 3000;
+    const port = 3000;
     await app.listen({ port });
 
     const addressInfo = app.server.address() as AddressInfo;
