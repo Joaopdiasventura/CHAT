@@ -5,9 +5,10 @@ let io: SocketIOServer;
 const userEmailToSocketId = new Map<string, string>();
 
 export function initializeSocket(server: HttpServer): void {
+    console.log(server);
     io = new SocketIOServer(server, {
         cors: {
-            origin: "http://localhost:5173",
+            origin: "*",
             methods: ["GET", "POST"]
         }
     });
