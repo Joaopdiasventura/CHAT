@@ -1,3 +1,4 @@
+// server.ts
 import { FastifyInstance } from 'fastify';
 import { initializeSocket } from './services/socket-io';
 import { AddressInfo } from 'net';
