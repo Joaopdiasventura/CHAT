@@ -1,10 +1,11 @@
+import { createServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
-import { Server as HttpServer } from 'http';
 
 let io: SocketIOServer;
 const userEmailToSocketId = new Map<string, string>();
 
-export function initializeSocket(server: HttpServer): void {
+export function initializeSocket(): void {
+  const server = createServer();
   io = new SocketIOServer(server, {
     cors: {
       origin: '*',
@@ -25,6 +26,11 @@ export function initializeSocket(server: HttpServer): void {
         }
       }
     });
+  });
+
+  const port = process.env.PORT || 3001;
+  server.listen(port, () => {
+    console.log(`Socket.IO server listening on port ${port}`);
   });
 }
 
