@@ -5,7 +5,7 @@ import GetMessagesController from "../controllers/getMessages/getMessagesControl
 import { SendMessageParams } from "../controllers/sendMessage/protocols";
 import { SendMessageRepository } from "../respositories/sendMessage/sendMessageRepository";
 import { SendMessageController } from "../controllers/sendMessage/sendMessageController";
-import { io, userEmailToSocketId } from "../services/socket-io";
+import axios from "axios";
 
 
 export default async function (app: FastifyInstance) {
@@ -31,7 +31,7 @@ export default async function (app: FastifyInstance) {
     app.post("/message", async (request, reply) => {
         const Body = request.body as SendMessageParams;
 
-        const sendMessageRepository = new SendMessageRepository(io, userEmailToSocketId);
+        const sendMessageRepository = new SendMessageRepository(await axios.get("http://localhost:3000/userEmailToSocketId").then(Response => Response.data));
         const sendMessageController = new SendMessageController(sendMessageRepository);
 
         try {

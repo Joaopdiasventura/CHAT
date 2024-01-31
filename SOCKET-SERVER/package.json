@@ -1,0 +1,19 @@
+{
+  "name": "socket",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn install && tsc",
+    "start": "node ./dist/app.js",
+    "dev": "nodemon --watch src --exec ts-node src/app.ts -e ts"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.4",
+    "tsc": "^2.0.4",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

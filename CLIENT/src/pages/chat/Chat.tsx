@@ -76,6 +76,7 @@ function Chat() {
     for (let i = 0; i < messages.length; i++) {
       criarElementoMensagem(messages[i]);
     }
+    focus();
   };
 
   const criarElementoMensagem = (mensagem) => {
@@ -158,8 +159,7 @@ function Chat() {
   
     return () => {
       if (socket) {
-        socket.off("newMessage"); // Corrigido para "newMessage" que é o evento correto
-        // Outros eventos podem ser removidos aqui se necessário
+        socket.off("newMessage");
       }
     };
   }, [currentChat, email, getChats, getMessages, handleNotification, nameFriend, socket]);

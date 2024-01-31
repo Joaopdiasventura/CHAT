@@ -1,5 +1,5 @@
 import { createServer } from 'http';
-import { Server as SocketIOServer } from 'socket.io';
+import { Server as SocketIOServer, Socket } from 'socket.io';
 
 let io: SocketIOServer;
 const userEmailToSocketId = new Map<string, string>();
@@ -13,9 +13,10 @@ export function initializeSocket(): void {
     },
   });
 
-  io.on('connection', (socket) => {
+  io.on('connection', (socket: Socket) => {
     socket.on('registerEmail', (email) => {
       userEmailToSocketId.set(email, socket.id);
+      console.log(userEmailToSocketId.get(email));
     });
 
     socket.on('disconnect', () => {
@@ -26,6 +27,19 @@ export function initializeSocket(): void {
         }
       }
     });
+
+    socket.on('newMessage', (result) => {
+        console.log(result);
+        io.to(result.to).emit('newMessage', result.data);
+      });
+  });
+
+  server.on('request', (req, res) => {
+    if (req.url === '/userEmailToSocketId') {
+      const userEmailToSocketIdArray = Array.from(userEmailToSocketId.entries());
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(userEmailToSocketIdArray));
+    }
   });
 
   const port = 3000;

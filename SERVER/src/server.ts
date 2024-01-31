@@ -1,6 +1,5 @@
 // server.ts
 import { FastifyInstance } from 'fastify';
-import { initializeSocket } from './services/socket-io';
 import { AddressInfo } from 'net';
 
 export default async function startServer(app: FastifyInstance) {
@@ -13,7 +12,6 @@ export default async function startServer(app: FastifyInstance) {
 
     console.log(`Server listening on port ${actualPort}`);
 
-    initializeSocket();
   } catch (err) {
     console.error(err);
     process.exit(1);
