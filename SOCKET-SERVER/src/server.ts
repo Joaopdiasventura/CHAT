@@ -43,7 +43,7 @@ export function initializeSocket(): void {
   });
 
   const port = 3000;
-  server.listen(port, () => {
+  server.listen(port, '0.0.0.0', () => {
     console.log(`Socket.IO server listening on port ${port}`);
   });
 }
