@@ -28,8 +28,10 @@ function Chat() {
   const userEmail = useRef<HTMLInputElement>(null);
   const content = useRef<HTMLInputElement>(null)
 
-  const getEmail = async (token: string) => {
-    setEmail(await app.get(`/decode/${token}`).then((result) => result.data));
+  const getEmail = async (token: string): Promise<string> => {
+    const Email = await app.get(`/decode/${token}`).then((result) => result.data)
+    setEmail(Email);
+    return Email;
   };
 
   const socket = useSocket(email);
@@ -52,7 +54,7 @@ function Chat() {
     }
   };
 
-  const getChats = async () => {
+  const getChats = async (email) => {
     const chats = await app
       .get(`/chat/${email}`)
       .then((Response) => Response.data);
@@ -112,7 +114,7 @@ function Chat() {
   const addChat = async (event: FormEvent) => {
     event.preventDefault();
     await app.post("/chat", { user: email, user_: userEmail.current.value });
-    getChats();
+    getChats(email);
   };
 
   const sendMessage = async (event: FormEvent) => {
@@ -138,8 +140,8 @@ function Chat() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getEmail(localStorage.getItem("token"));
-      await getChats();
+      const Email = await getEmail(localStorage.getItem("token"));
+      getChats(Email);
   
       if (socket) {
         socket.on("newMessage", handleNewMessage);
