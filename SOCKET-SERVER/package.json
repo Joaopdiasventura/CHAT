@@ -9,7 +9,7 @@
     "dev": "nodemon --watch src --exec ts-node src/app.ts -e ts"
   },
   "dependencies": {
-    "http": "^0.0.1",
+    "http": "^0.0.1-security",
     "socket.io": "^4.7.4",
     "tsc": "^2.0.4",
     "typescript": "^5.3.3"
