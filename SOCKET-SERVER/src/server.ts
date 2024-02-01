@@ -38,7 +38,7 @@ export function initializeSocket(): void {
     if (req.url === '/userEmailToSocketId') {
       const userEmailToSocketIdArray = Array.from(userEmailToSocketId.entries());
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(userEmailToSocketIdArray));
+      return res.end(JSON.stringify(userEmailToSocketIdArray));
     }
   });
 
