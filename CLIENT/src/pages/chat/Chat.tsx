@@ -42,14 +42,6 @@ function Chat() {
         new Notification("Você recebeu uma mensagem de " + msg.name, {
           body: msg.content,
         });
-      } else if (Notification.permission != "denied") {
-        Notification.requestPermission().then((permission) => {
-          if (permission == "granted") {
-            new Notification("Você recebeu uma mensagem de " + msg.name, {
-              body: msg.content,
-            });
-          }
-        });
       }
     }
   };
