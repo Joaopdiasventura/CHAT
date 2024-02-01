@@ -9,7 +9,7 @@ export function initializeSocket(fastify: FastifyInstance): void {
 
   io = new SocketIOServer(httpServer, {
     cors: {
-      origin: ['https://chat-two-ochre-97.vercel.app'],
+      origin: [process.env.FRONTEND],
       methods: ['GET', 'POST'],
     },
   });
