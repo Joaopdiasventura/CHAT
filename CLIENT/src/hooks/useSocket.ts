@@ -7,23 +7,27 @@ export const useSocket = (userEmail: string) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketIo = io(SERVER_URL);
-  
+    const socketIo = io(SERVER_URL, {
+      transports: ['websocket'],
+    });
+
     socketIo.on('connect', () => {
       console.log('Conectado ao servidor!');
       socketIo.emit('registerEmail', userEmail);
     });
-  
+
+    socketIo.on('disconnect', () => {
+      console.log('Desconectado do servidor!');
+    });
+
     setSocket(socketIo);
-  
-    function cleanup() {
+
+    // Cleanup function
+    return () => {
       socketIo.disconnect();
-    }
-  
-    return cleanup;
-  
+    };
+
   }, [userEmail]);
-  
 
   return socket;
 };

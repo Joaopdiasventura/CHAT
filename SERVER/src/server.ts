@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { AddressInfo } from 'net';
+import { initializeSocket } from './services/socket-io';
 
 export default async function startServer(app: FastifyInstance) {
   try {
@@ -9,6 +10,8 @@ export default async function startServer(app: FastifyInstance) {
 
     const addressInfo = app.server.address() as AddressInfo;
     const actualPort = addressInfo.port;
+
+    initializeSocket();
 
     console.log(`Server listening on port ${actualPort}`);
 

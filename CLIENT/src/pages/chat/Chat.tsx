@@ -137,34 +137,37 @@ function Chat() {
   }
 
   useEffect(() => {
-    getEmail(localStorage.getItem("token"));
-    getChats();
+    const fetchData = async () => {
+      await getEmail(localStorage.getItem("token"));
+      await getChats();
   
-    if (socket) {
-      socket.on("newMessage", (notificationMsg) => {
-        console.log(notificationMsg);
-        handleNotification(notificationMsg);
-        
-        if ("id" in currentChat) {
-          const friend = nameFriend(currentChat);
-          if (friend === notificationMsg.name) {
-            getMessages(currentChat);
-            setTimeout(() => {
-              focus();
-            }, 300);
-          }
+      if (socket) {
+        socket.on("newMessage", handleNewMessage);
+      }
+    };
+  
+    const handleNewMessage = (notificationMsg) => {
+      handleNotification(notificationMsg.data);
+      if ("id" in currentChat) {
+        const friend = nameFriend(currentChat);
+        if (friend === notificationMsg.data.name) {
+          getMessages(currentChat);
+          setTimeout(() => {
+            focus();
+          }, 300);
         }
-      });
-    }
+      }
+    };
+  
+    fetchData();
   
     return () => {
       if (socket) {
-        socket.off("newMessage");
+        socket.off("newMessage", handleNewMessage);
       }
     };
-  }, [currentChat, email, getChats, getMessages, handleNotification, nameFriend, socket]);
+  }, [currentChat, email, getChats, getMessages, handleNotification, nameFriend, socket, focus]);  
   
-
   return (
     <Body>
       <div id="sidebar">

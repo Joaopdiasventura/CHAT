@@ -1,16 +1,17 @@
-import { io, Socket } from 'socket.io-client';
+import { Server } from "socket.io";
 import { message } from "../../controllers/protocols";
 import { ISendMessagerepository, SendMessageParams } from "../../controllers/sendMessage/protocols";
 import Message from "../../models/Message";
 import prisma from "../../services/prisma";
+import { io } from '../../services/socket-io';
 
 export class SendMessageRepository implements ISendMessagerepository {
     private userEmailToSocketId: Map<string, string>;
-    private io: Socket;  
+    private Io: Server;  
 
     constructor(userEmailToSocketId: Map<string, string>) {
-        this.io = io('http://localhost:3000');        
-        this.userEmailToSocketId = new Map(userEmailToSocketId);
+        this.Io = io;       
+        this.userEmailToSocketId = userEmailToSocketId;
     }
 
     async sendMessage(params: SendMessageParams): Promise<Message[] | message> {
@@ -50,10 +51,9 @@ export class SendMessageRepository implements ISendMessagerepository {
             }
 
             const socketId  = this.userEmailToSocketId.get(recipientEmail);
-            console.log(socketId);
             if (socketId ) {
                 const content = msg.content;
-                this.io.emit('newMessage', { to: socketId, data: { name, content } });
+                this.Io.emit('newMessage', { to: socketId, data: { name, content } });
             }            
 
             return updatedMessages;
