@@ -5,7 +5,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const app = axios.create({
-  baseURL: "https://chat-9549.onrender.com",
+  baseURL: "http://localhost:10000",
 });
 
 const Body = css();
@@ -125,9 +125,9 @@ function Chat() {
       await app.post("/message", {chat: currentChat.id, user: email, content: Content});
       await getMessages(currentChat);
       focus();
-      if (currentChat.user_ == "chat@gmail.com") {
-        const reponse = await axios.get("https://ia-gqln.onrender.com/mandar/${Content}").then(Response => Response.data);
-        await app.post("/message", {chat: currentChat.id, user: currentChat.user_, content: reponse});
+      if (currentChat.user_ == "IA") {
+        const reponse = await axios.get(`https://ia-gqln.onrender.com/mandar/${Content}`).then(Response => Response.data);
+        await app.post("/message", {chat: currentChat.id, user: "chat@gmail.com", content: reponse});
         await getMessages(currentChat);
         focus();
       }
