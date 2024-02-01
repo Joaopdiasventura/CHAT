@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:10000';
+const SERVER_URL = 'https://chat-9549.onrender.com';
 
 export const useSocket = (userEmail: string) => {
   const [socket, setSocket] = useState<Socket | null>(null);
