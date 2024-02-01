@@ -227,8 +227,9 @@ export const css = () => {
     }
 
     @media only screen and (max-width: 767px) {
+      flex-direction: column;
       body {
-        flex-direction: reverse-column;
+        flex-direction: column;
       }
 
       #sidebar,
@@ -256,6 +257,17 @@ export const css = () => {
 
       #contacts {
         text-align: center;
+      }
+
+      input[type="text"],
+      input[type="submit"],
+      #email {
+        width: 100%;
+      }
+
+      .usuario,
+      .amigo {
+        max-width: 100%;
       }
     }
   `;

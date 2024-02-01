@@ -173,7 +173,6 @@ function Chat() {
   return (
     <Body>
       <div id="sidebar">
-        <button id="out">LOGOUT</button>
         <button id="iadd" onClick={showAdd}>
           ADICIONAR CONTATO
         </button>
