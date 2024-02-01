@@ -11,7 +11,7 @@ export default async function startServer(app: FastifyInstance) {
     const addressInfo = app.server.address() as AddressInfo;
     const actualPort = addressInfo.port;
 
-    initializeSocket();
+    initializeSocket(app);
 
     console.log(`Server listening on port ${actualPort}`);
 
