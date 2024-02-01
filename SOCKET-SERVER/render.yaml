@@ -1,0 +1,6 @@
+services:
+  - name: chat-socket
+    plan: starter
+    env:
+      - key: NODE_ENV
+        value: production
