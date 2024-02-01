@@ -239,7 +239,7 @@ export const css = () => {
       }
 
       #sidebar {
-        height: 40%;
+        height: 35%;
         overflow-y: auto;
       }
 
@@ -252,7 +252,7 @@ export const css = () => {
       }
 
       #conversation {
-        height: 320px;
+        height: 300px;
       }
 
       #contacts {
