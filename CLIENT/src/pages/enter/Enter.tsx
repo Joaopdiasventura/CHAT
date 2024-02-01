@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { css } from './Css';
 
 const app = axios.create({
-    baseURL: "http://localhost:10000/"
+    baseURL: "https://chat-9549.onrender.com"
 });
 
 const Body = css();
