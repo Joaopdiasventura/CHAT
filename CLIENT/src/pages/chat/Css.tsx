@@ -265,10 +265,6 @@ export const css = () => {
         width: 100%;
       }
 
-      .usuario,
-      .amigo {
-        max-width: 100%;
-      }
     }
   `;
 };
