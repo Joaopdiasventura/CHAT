@@ -125,6 +125,12 @@ function Chat() {
       await app.post("/message", {chat: currentChat.id, user: email, content: Content});
       await getMessages(currentChat);
       focus();
+      if (currentChat.user_ == "chat@gmail.com") {
+        const reponse = await axios.get("https://ia-gqln.onrender.com/mandar/${Content}").then(Response => Response.data);
+        await app.post("/message", {chat: currentChat.id, user: currentChat.user_, content: reponse});
+        await getMessages(currentChat);
+        focus();
+      }
     }
   }
 

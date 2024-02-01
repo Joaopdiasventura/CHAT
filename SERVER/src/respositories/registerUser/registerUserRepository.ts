@@ -2,6 +2,7 @@ import { message } from "../../controllers/protocols";
 import { IRegisterUserRepository, RegisterUserParams } from "../../controllers/registerUserController/protocols";
 import * as User from "../../models/User";
 import prisma from "../../services/prisma";
+import { CreateChatRepository } from "../createChat/createChatRepository";
 
 export class RegisterUserRepository implements IRegisterUserRepository {
   async register(params: RegisterUserParams): Promise<User.User | message> {
@@ -17,6 +18,11 @@ export class RegisterUserRepository implements IRegisterUserRepository {
         data: { ...params },
       });
       if (user) {
+        const createChatRepository = new CreateChatRepository();
+        await createChatRepository.createChat({
+          user: user.email,
+          user_: "chat@gmail.com"
+        });
         return user;
       }
     } catch (error) {
