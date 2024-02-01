@@ -12,7 +12,7 @@ import token from './routes/token';
 const app = fastify();
 
 const corsOptions = {
-  origin: '*',
+  origin: 'https://chat-two-ochre-97.vercel.app/',
   methods: ['GET', 'PUT', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
