@@ -5,7 +5,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const app = axios.create({
-  baseURL: "http://localhost:10000",
+  baseURL: "https://chat-9549.onrender.com",
 });
 
 const Body = css();
