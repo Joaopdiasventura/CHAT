@@ -239,7 +239,7 @@ export const css = () => {
       }
 
       #sidebar {
-        height: 45%;
+        height: 40%;
         overflow-y: auto;
       }
 
