@@ -252,7 +252,7 @@ export const css = () => {
       }
 
       #conversation {
-        height: 50%;
+        height: 320px;
       }
 
       #contacts {
