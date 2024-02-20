@@ -113,15 +113,17 @@ function Chat() {
     event.preventDefault();
     if ("id" in currentChat) {
       const Content = content.current.value;
-      content.current.value = "";
-      await app.post("/message", {chat: currentChat.id, user: email, content: Content});
-      await getMessages(currentChat);
-      focus();
-      if (currentChat.user_ == "IA") {
-        const reponse = await axios.get(`https://ia-gqln.onrender.com/mandar/${Content}`).then(Response => Response.data);
-        await app.post("/message", {chat: currentChat.id, user: "chat@gmail.com", content: reponse});
+      if (Content.trim() != "") {
+        content.current.value = "";
+        await app.post("/message", {chat: currentChat.id, user: email, content: Content});
         await getMessages(currentChat);
         focus();
+        if (currentChat.user_ == "IA") {
+          const reponse = await axios.get(`https://ia-gqln.onrender.com/mandar/${Content}`).then(Response => Response.data);
+          await app.post("/message", {chat: currentChat.id, user: "chat@gmail.com", content: reponse});
+          await getMessages(currentChat);
+          focus();
+        }
       }
     }
   }
